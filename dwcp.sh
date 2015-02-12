@@ -15,6 +15,8 @@ cd $in
 
 # Check if current directory contains any .CSV files.
 count=`ls -1 *.csv 2>/dev/null | wc -l`
+
+# True if there are .CSV files present
 if [ $count != 0 ]
 then
 
