@@ -1,9 +1,10 @@
 #!/bin/bash
 
-if [ $# -le 2 ]; then
+if [ $# -lt 2 ]; then
 	echo "Usage: ./dwcp.sh [In] [Out]"
 	echo "[In] : The input directory."
 	echo "[Out] : The output directory."
+	exit 1;
 fi
 
 # The directory to move files from.
@@ -26,6 +27,7 @@ do
 
 	# Generate file's new name.
 	file_datestamped="${file%.*}_${now}"
+	file_no_ext="${file%.*}"
 
 		cp $file $out/${file}
 
@@ -37,6 +39,6 @@ do
 		mv $file $in/processed/${file_datestamped}.csv
 
 	# remove .log and .bad files present from older versions of the file.
-	rm $out/${file}.log $out/${file}.bad
+	rm $out/${file_no_ext}.log $out/${file_no_ext}.bad
 
 done
