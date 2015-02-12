@@ -20,7 +20,7 @@ cd in
 
   		mv $file $in/processed/${file_datestamped}.csv
 
-		rm $file_datestamped.log $file_datestamped.bad
+		rm $out/$file_datestamped.log $out/$file_datestamped.bad
 
 	done
 # fi
