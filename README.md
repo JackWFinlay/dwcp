@@ -1,7 +1,7 @@
 # dwcp
 Copies and renames files into new directory. deletes .log and .bad files in output directory that may remain from previous files.
 
-## Files
+#### Files
 
 *dwcp.sh* - The script that does all the work.
 
