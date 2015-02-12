@@ -34,7 +34,7 @@ do
 
 	# Create processed directory if it doesn't exist.
 	if [ ! -d "$in/processed" ]; then
-			mkdir $in/processed
+		mkdir $in/processed
 	fi
 
 	mv $file $in/processed/${file_datestamped}.csv
