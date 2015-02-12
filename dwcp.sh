@@ -29,14 +29,14 @@ do
 	file_datestamped="${file%.*}_${now}"
 	file_no_ext="${file%.*}"
 
-		cp $file $out/${file}
+	cp $file $out/${file}
 
 	# Create processed directory if it doesn't exist.
 	if [ ! -d "$in/processed" ]; then
 			mkdir $in/processed
 	fi
 
-		mv $file $in/processed/${file_datestamped}.csv
+	mv $file $in/processed/${file_datestamped}.csv
 
 	# remove .log and .bad files present from older versions of the file.
 	rm $out/${file_no_ext}.log $out/${file_no_ext}.bad
