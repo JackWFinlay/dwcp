@@ -24,14 +24,14 @@ then
 		# Generate file's new name.
 		file_datestamped="${file%.*}_${now}"
 
-  	cp $file $out/${file_datestamped}.csv
+  		cp $file $out/${file_datestamped}.csv
 
 		# Create processed directory if it doesn't exist.
 		if [ ! -d "$in/processed" ]; then
  			mkdir $in/processed
 		fi
 
-  	mv $file $in/processed/${file_datestamped}.csv
+  		mv $file $in/processed/${file_datestamped}.csv
 
 		# remove .log and .bad files present from older versions of the file.
 		rm $out/$file_datestamped.log $out/$file_datestamped.bad
