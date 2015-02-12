@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Usage: ./dwcp.sh <in> <out>
+if [ $# -le 2 ]; then
+	echo "Usage: ./dwcp.sh [In] [Out]"
+	echo "[In] : The input directory."
+	echo "[Out] : The output directory."
+fi
 
 # The directory to move files from.
 in=$1
@@ -9,39 +13,30 @@ in=$1
 out=$2
 
 # The current date.
-now=$(date +%Y_%m_%d)
+now=$(date +%s)
 
 cd $in
 
-# Check if current directory contains any .CSV files.
-count=`ls -1 *.csv 2>/dev/null | wc -l`
+shopt -s nullglob
 
-# True if there are .CSV files present
-if [ $count != 0 ]
-then
+# For every .CSV file in the directory.
+for file in *.csv
+do
+	shopt -u nullglob
 
-	# For every .CSV file in the directory.
-	for file in *.csv
-	do
-		# Generate file's new name.
-		file_datestamped="${file%.*}_${now}"
+	# Generate file's new name.
+	file_datestamped="${file%.*}_${now}"
 
-  		cp $file $out/${file_datestamped}.csv
+		cp $file $out/${file}
 
-		# Create processed directory if it doesn't exist.
-		if [ ! -d "$in/processed" ]; then
- 			mkdir $in/processed
-		fi
+	# Create processed directory if it doesn't exist.
+	if [ ! -d "$in/processed" ]; then
+			mkdir $in/processed
+	fi
 
-  		mv $file $in/processed/${file_datestamped}.csv
+		mv $file $in/processed/${file_datestamped}.csv
 
-		# remove .log and .bad files present from older versions of the file.
-		rm $out/$file_datestamped.log $out/$file_datestamped.bad
+	# remove .log and .bad files present from older versions of the file.
+	rm $out/${file}.log $out/${file}.bad
 
-	done
-
-else
-	# If a directory contains no .CSV files, don't do anything.
-	echo "Directory $in	does not contain any .csv files."
-
-fi
+done
