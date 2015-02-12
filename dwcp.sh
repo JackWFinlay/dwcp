@@ -6,8 +6,9 @@ now=$(date +%Y_%m_%d)
 
 cd in
 
-# if ls ${in}/*.txt &>/dev/null && ls ${in}/*.csv &>/dev/null
-# then 
+count=`ls -1 *.csv 2>/dev/null | wc -l`
+if [ $count != 0 ]
+then 
 	for file in *.csv
 	do
 		file_datestamped="${file%.*}_${now}"
@@ -23,4 +24,7 @@ cd in
 		rm $out/$file_datestamped.log $out/$file_datestamped.bad
 
 	done
-# fi
+else
+	echo "$in does not contain any .csv files"
+
+fi
