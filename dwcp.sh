@@ -13,11 +13,12 @@ in=$1
 # The directory to move files to.
 out=$2
 
-# The current date.
+# The current date as UNIX timestamp.
 now=$(date +%s)
 
 cd $in
 
+# Replace return null globs as no arguments.
 shopt -s nullglob
 
 # For every .CSV file in the directory.
