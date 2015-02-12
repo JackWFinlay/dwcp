@@ -2,16 +2,25 @@
 
 in=$1
 out=$2
-now=(date +"%Y_%m_%d")
+now=$(date +%Y_%m_%d)
 
-for file in $in.csv
-do
+cd in
 
-  file_datestamped="${file%.*}$now"
+# if ls ${in}/*.txt &>/dev/null && ls ${in}/*.csv &>/dev/null
+# then 
+	for file in *.csv
+	do
+		file_datestamped="${file%.*}_${now}"
+	
+  		cp $file $out/${file_datestamped}.csv
 
-  sudo cp $file $out/$file_datestamped.csv
-  sudo mv $file $in/processed/$out/$file_datestamped.csv
+		if [ ! -d "$in/processed" ]; then
+ 			mkdir $in/processed 
+		fi
 
-  sudo rm $file_datestamped.log $file_datestamped.bad
+  		mv $file $in/processed/${file_datestamped}.csv
 
-done
+		rm $file_datestamped.log $file_datestamped.bad
+
+	done
+# fi
