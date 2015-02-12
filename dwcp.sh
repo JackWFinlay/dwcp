@@ -4,7 +4,7 @@ in=$1
 out=$2
 now=$(date +%Y_%m_%d)
 
-cd in
+cd $in
 
 count=`ls -1 *.csv 2>/dev/null | wc -l`
 if [ $count != 0 ]
